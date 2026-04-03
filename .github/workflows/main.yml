@@ -38,9 +38,9 @@ jobs:
           # Provide the Tenant for AST portal URL
           cx_tenant: ast_abdul_ansari
           # Client ID for AST portal authentication
-          cx_client_id: harshgokani
+          cx_client_id: ${{ secrets.CX_CLIENT_ID }}
           # Secret key for AST portal authentication
-          cx_client_secret: Y1V62Ok8y0qXBrLGyNrEY5WWZ2wEFXRH
+          cx_client_secret: ${{ secrets.CX_CLIENT_SECRET }}
           # Checkmarx Project Name (defaults to GitHub repository name if not provided)
           project_name: ${{ github.repository }}
           # Branch Name
