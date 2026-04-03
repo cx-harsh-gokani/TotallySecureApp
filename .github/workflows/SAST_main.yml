@@ -44,7 +44,7 @@ jobs:
          project_name: ${{ github.repository }}
     # Branch name
          branch:  ${{ github.head_ref || github.ref }}
-         filter: --report-format pdf
+         additional_params: --report-format pdf
 
   # dast:
   #   runs-on: ubuntu-latest
