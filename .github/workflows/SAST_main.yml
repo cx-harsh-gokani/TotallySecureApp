@@ -44,7 +44,10 @@ jobs:
          project_name: ${{ github.repository }}
     # Branch name
          branch:  ${{ github.head_ref || github.ref }}
-         additional_params: --report-format pdf ; --output-name Mckinsey_Demo.pdf ; ---report-pdf-email harsh.gokani@checkmarx.com
+         scan_params: 
+           --report-format pdf ; 
+           --output-name Mckinsey_Demo.pdf ; 
+           --report-pdf-email harsh.gokani@checkmarx.com
 
   # dast:
   #   runs-on: ubuntu-latest
