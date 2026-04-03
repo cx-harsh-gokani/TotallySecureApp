@@ -45,8 +45,9 @@ jobs:
     # Branch name
          branch:  ${{ github.head_ref || github.ref }}
          scan_params: 
-           --report-format pdf ; 
-           --output-name Mckinsey_Demo.pdf ; 
+           --scan-types sast,sca
+           --report-format pdf
+           --output-name Mckinsey_Demo.pdf 
            --report-pdf-email harsh.gokani@checkmarx.com
 
   # dast:
