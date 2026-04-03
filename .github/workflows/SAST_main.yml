@@ -1,5 +1,4 @@
 name: Checkmarx Security Scan
- 
 on:
   push:
     branches:
@@ -45,4 +44,36 @@ jobs:
          project_name: ${{ github.repository }}
     # Branch name
          branch:  ${{ github.head_ref || github.ref }}
-    
+
+  dast:
+    runs-on: ubuntu-latest
+    name: Checkmarx DAST Scan 
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+      - name: Create Output folder
+        run: mkdir ${{ runner.temp }}/output
+      # - name: Change dast-config owner
+      #   run: sudo chmod 777 -R dast-config        
+      - name: Change dir owner
+        run: sudo chown -R 1000:1000 ${{ runner.temp }}/output
+      - name: Run DAST-CLI command
+        run: |
+           docker run --pull=always \
+           -v ${{ runner.temp }}/output:/tmp \
+           -e CX_APIKEY=eyJhbGciOiJIUzUxMiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICI5ZDMzNDA4Yy0yMGVjLTQ2ZjgtYWY5ZC1kZTljYmU0MWZlOTIifQ.eyJpYXQiOjE3NzUyMTM5NTEsImp0aSI6IjU5MWMzMzI4LWJhMDktNDM4Zi1iNTVjLTQ1MjI3MzcyMzhjNCIsImlzcyI6Imh0dHBzOi8vZXUuaWFtLmNoZWNrbWFyeC5uZXQvYXV0aC9yZWFsbXMvYXN0X2FiZHVsX2Fuc2FyaSIsImF1ZCI6Imh0dHBzOi8vZXUuaWFtLmNoZWNrbWFyeC5uZXQvYXV0aC9yZWFsbXMvYXN0X2FiZHVsX2Fuc2FyaSIsInN1YiI6ImMwY2M2NDBhLTMwNDQtNDM3YS05NzI4LTZhZGVlMjA4YjFmNSIsInR5cCI6Ik9mZmxpbmUiLCJhenAiOiJhc3QtYXBwIiwic2lkIjoiOGZmMzcwMjAtYzlkZS00MGJiLWE2ODctNjdiZmUzNjk4YWMyIiwic2NvcGUiOiJyb2xlcyBwcm9maWxlIGVtYWlsIGlhbS1hcGkgYXN0LWFwaSBvZmZsaW5lX2FjY2VzcyJ9.vMa8CFFD2ByJUHXoyV-9TCOsSAlcYDw9zXL1iGt1jcdvdwCjkd0r48ZNN8Cw9bHXWyg7PdVDBaWLUkK-TdWgIg \
+           checkmarx/dast:latest \
+           scan \
+           --environment-id=d93345be-fc7d-4096-9d76-e99a0292ffed \
+           --base-url=https://eu.ast.checkmarx.net \
+           --output=/output
+           
+      - name: Set permission on output folder
+        run: |
+         sudo chown -R 1001:1001 ${{ runner.temp }}/output
+      - name: Upload ZAP output
+        uses: actions/upload-artifact@b4b15b8c7c6ac21ea08fcf65892d2ee8f75cf882 # v4.4.3
+        if: always()
+        with:
+          name: zap-output
+          path: ${{ runner.temp }}/output
