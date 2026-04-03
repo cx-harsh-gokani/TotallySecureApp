@@ -76,7 +76,7 @@ jobs:
         run: |
           docker run --pull=always \
             -v ${{ runner.temp }}/output:/output \
-            -e CX_APIKEY=${{ secrets.CX_APIKEY }} \
+            -e CX_APIKEY=eyJhbGciOiJIUzUxMiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICI5ZDMzNDA4Yy0yMGVjLTQ2ZjgtYWY5ZC1kZTljYmU0MWZlOTIifQ.eyJpYXQiOjE3NzUyMTM5NTEsImp0aSI6IjU5MWMzMzI4LWJhMDktNDM4Zi1iNTVjLTQ1MjI3MzcyMzhjNCIsImlzcyI6Imh0dHBzOi8vZXUuaWFtLmNoZWNrbWFyeC5uZXQvYXV0aC9yZWFsbXMvYXN0X2FiZHVsX2Fuc2FyaSIsImF1ZCI6Imh0dHBzOi8vZXUuaWFtLmNoZWNrbWFyeC5uZXQvYXV0aC9yZWFsbXMvYXN0X2FiZHVsX2Fuc2FyaSIsInN1YiI6ImMwY2M2NDBhLTMwNDQtNDM3YS05NzI4LTZhZGVlMjA4YjFmNSIsInR5cCI6Ik9mZmxpbmUiLCJhenAiOiJhc3QtYXBwIiwic2lkIjoiOGZmMzcwMjAtYzlkZS00MGJiLWE2ODctNjdiZmUzNjk4YWMyIiwic2NvcGUiOiJyb2xlcyBwcm9maWxlIGVtYWlsIGlhbS1hcGkgYXN0LWFwaSBvZmZsaW5lX2FjY2VzcyJ9.vMa8CFFD2ByJUHXoyV-9TCOsSAlcYDw9zXL1iGt1jcdvdwCjkd0r48ZNN8Cw9bHXWyg7PdVDBaWLUkK-TdWgIg \
             checkmarx/dast:latest \
             scan \
             --environment-id=d93345be-fc7d-4096-9d76-e99a0292ffed \
