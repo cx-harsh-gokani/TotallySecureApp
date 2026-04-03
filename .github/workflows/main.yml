@@ -59,8 +59,8 @@ jobs:
     steps:
       - name: Checkout Code
         uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
-      - name: Create Output folder
-        run: mkdir ${{ runner.temp }}/output
+      # - name: Create Output folder
+      #   run: mkdir ${{ runner.temp }}/output
       - name: Change dast-config owner
         run: sudo chmod 777 -R dast-config        
       - name: Change dir owner
