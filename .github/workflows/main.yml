@@ -16,7 +16,6 @@
 #   contents: read
 
 name: DAST Demo Env
-
 on:
   pull_request:
     branches:
