@@ -21,8 +21,36 @@ on:
   pull_request:
     branches:
       - main
-  workflow_dispatch:
-
+#   workflow_dispatch:
+# jobs:
+#   dast:
+#     runs-on: ubuntu-latest
+#     name: DAST Action
+#     steps:
+#       - name: Checkout Code
+#         uses: actions/checkout@v3
+#       - name: Create Output folder
+#         run: mkdir ${{ github.workspace }}/output_fold
+#       - name: Change dast-config owner
+#         run: sudo chmod 777 -R dast-config
+#       - name: Run DAST-CLI command
+#         run: |
+#           docker run \
+#            -e CX_APIKEY=eyJhbGciO... \
+#            -v ${{ github.workspace }}/output_fold:/output_fold:z \
+#            -v ${{ github.workspace }}/dast-config:/dast-config:z \
+#            checkmarx/dast:latest web \
+#            --base-url=https://ast-master-components.dev.cxast.net \
+#            --environment-id=9257043d-fce7-4566-9b51-025f0164f5f7 \
+#            --config=/dast-config/gin_juice.yaml \
+#            --output=/output_fold \
+#            --timeout=10000 \
+#            --update-interval=30 \
+#            --jvm-properties=-Xmx3G \
+#            --log-level=info \
+#            --verbose \
+#            --retry=3 \
+#            --retry-delay=20
 jobs:
   dast:
     runs-on: ubuntu-latest
@@ -32,6 +60,8 @@ jobs:
         uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
       - name: Create Output folder
         run: mkdir ${{ runner.temp }}/output
+      - name: Change dast-config owner
+        run: sudo chmod 777 -R dast-config        
       - name: Change dir owner
         run: sudo chown -R 1000:1000 ${{ runner.temp }}/output
       - name: Run DAST-CLI command
