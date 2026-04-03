@@ -24,7 +24,7 @@ jobs:
  
     runs-on: ubuntu-latest
  
-    steps:
+    steps: 
       # Step 1: Checkout Repository
       - name: Checkout Repository
         uses: actions/checkout@v3
@@ -46,4 +46,9 @@ jobs:
           # Branch Name
           branch: ${{ github.head_ref || github.ref }}
           scantypes: sast,sca
- 
+          scanparams: --report-types pdf 
+          
+      - name: Run Checkmarx DAST Scan
+        run: docker run --pull=always -e CX_APIKEY=eyJhbGciOiJIUzUxMiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICI5ZDMzNDA4Yy0yMGVjLTQ2ZjgtYWY5ZC1kZTljYmU0MWZlOTIifQ.eyJpYXQiOjE3NzUxOTgyODQsImp0aSI6ImViNGM0OWYxLTRmYWMtNDViYy04MTEzLWI1NzNlMGY2NjU2YyIsImlzcyI6Imh0dHBzOi8vZXUuaWFtLmNoZWNrbWFyeC5uZXQvYXV0aC9yZWFsbXMvYXN0X2FiZHVsX2Fuc2FyaSIsImF1ZCI6Imh0dHBzOi8vZXUuaWFtLmNoZWNrbWFyeC5uZXQvYXV0aC9yZWFsbXMvYXN0X2FiZHVsX2Fuc2FyaSIsInN1YiI6ImMwY2M2NDBhLTMwNDQtNDM3YS05NzI4LTZhZGVlMjA4YjFmNSIsInR5cCI6Ik9mZmxpbmUiLCJhenAiOiJhc3QtYXBwIiwic2lkIjoiOTFjNzE1YTEtNzljMC00ZjRlLWFmNDUtMzQ3ZWFmOGZmMDZlIiwic2NvcGUiOiJyb2xlcyBwcm9maWxlIGVtYWlsIGlhbS1hcGkgYXN0LWFwaSBvZmZsaW5lX2FjY2VzcyJ9.lidYN0E8rxZ7SK7KSYwjWtFc9AabS6Xof9hSaXUrX8bPAfVj4I-35hdXG9fIwnx9blGDiyKvVHlHO6FWuRCd_A checkmarx/dast:latest scan --environment-id=d93345be-fc7d-4096-9d76-e99a0292ffed --base-url=https://eu.ast.checkmarx.net --output=/tmp-t https://your-application-url.com \
+
+         
