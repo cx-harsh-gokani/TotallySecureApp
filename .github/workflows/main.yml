@@ -73,7 +73,7 @@ jobs:
            scan \
            --environment-id=d93345be-fc7d-4096-9d76-e99a0292ffed \
            --base-url=https://eu.ast.checkmarx.net \
-           --output=/tmp
+           --output=/output
            
       - name: Set permission on output folder
         run: |
