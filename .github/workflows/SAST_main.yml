@@ -22,7 +22,7 @@ jobs:
       actions: read # Only required for private repositories
  
     runs-on: ubuntu-latest
- 
+  
     steps:
       # Step 1: Checkout Repository
       - name: Checkout Repository
