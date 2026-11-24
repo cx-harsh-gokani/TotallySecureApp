@@ -47,7 +47,7 @@ jobs:
          scan_params: 
            --scan-types sast,sca
            --report-format pdf
-           --output-name Mckinsey_Demo.pdf 
+           --output-name Demo.pdf 
            --report-pdf-email harsh.gokani@checkmarx.com
 
   # dast:
